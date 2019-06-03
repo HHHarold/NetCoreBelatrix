@@ -1,4 +1,6 @@
-﻿namespace Belatrix.WebApi.Models
+﻿using System.Collections.Generic;
+
+namespace Belatrix.WebApi.Models
 {
     public class Supplier
     {
@@ -10,5 +12,7 @@
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Fax { get; set; }
+
+        public virtual ICollection<Product> Products{ get; set; }
     }
 }

@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Belatrix.WebApi", "Belatrix.WebApi\Belatrix.WebApi.csproj", "{83736A5C-0BF5-4195-B83A-094760B94FF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Belatrix.WebApi", "Belatrix.WebApi\Belatrix.WebApi.csproj", "{83736A5C-0BF5-4195-B83A-094760B94FF7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Belatrix.WebApi.Models", "Belatrix.Models\Belatrix.WebApi.Models.csproj", "{EA60782B-129D-4B15-82E7-7BD371AE0C50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Belatrix.WebApi.Repository", "Belatrix.WebApi.Repository\Belatrix.WebApi.Repository.csproj", "{245E1084-902A-420F-8005-F00972C4754D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Belatrix.WebApi.Repository.Postgresql", "Belatrix.WebApi.Repository.Postgresql\Belatrix.WebApi.Repository.Postgresql.csproj", "{B3FD700C-41A9-420D-A79A-353F0AF9C431}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{EA60782B-129D-4B15-82E7-7BD371AE0C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA60782B-129D-4B15-82E7-7BD371AE0C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA60782B-129D-4B15-82E7-7BD371AE0C50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{245E1084-902A-420F-8005-F00972C4754D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{245E1084-902A-420F-8005-F00972C4754D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{245E1084-902A-420F-8005-F00972C4754D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{245E1084-902A-420F-8005-F00972C4754D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3FD700C-41A9-420D-A79A-353F0AF9C431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3FD700C-41A9-420D-A79A-353F0AF9C431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3FD700C-41A9-420D-A79A-353F0AF9C431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3FD700C-41A9-420D-A79A-353F0AF9C431}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

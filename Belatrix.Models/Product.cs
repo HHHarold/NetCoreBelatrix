@@ -1,4 +1,7 @@
-﻿namespace Belatrix.WebApi.Models
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace Belatrix.WebApi.Models
 {
     public class Product
     {
@@ -8,5 +11,8 @@
         public decimal? UnitPrice { get; set; }
         public string Package { get; set; }
         public bool IsDiscontinued { get; set; }
+
+        public virtual Supplier SupplierNavigation { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }
