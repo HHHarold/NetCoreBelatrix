@@ -12,7 +12,7 @@ namespace Belatrix.WebApi.Models
         public string Package { get; set; }
         public bool IsDiscontinued { get; set; }
 
-        public virtual Supplier SupplierNavigation { get; set; }
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public Supplier Supplier { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
     }
 }

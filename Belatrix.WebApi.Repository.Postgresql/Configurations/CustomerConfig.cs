@@ -8,11 +8,12 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.ToTable("customer");
+            builder.ToTable("customer")
+                .HasKey(c => c.Id)
+                .HasName("customer_id_pkey");
 
             builder.Property(p => p.Id)
-                .HasColumnName("id")
-                .UseNpgsqlIdentityColumn();
+                .HasColumnName("id");
 
             builder.Property(p => p.FirstName)
                 .HasColumnName("first_name")
@@ -29,18 +30,15 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
 
             builder.Property(p => p.City)
                 .HasColumnName("city")
-                .HasMaxLength(40)
-                .IsRequired();
+                .HasMaxLength(40);
 
             builder.Property(p => p.Country)
                 .HasColumnName("country")
-                .HasMaxLength(40)
-                .IsRequired();
+                .HasMaxLength(40);
 
             builder.Property(p => p.Phone)
                 .HasColumnName("phone")
-                .HasMaxLength(20)
-                .IsRequired();
+                .HasMaxLength(20);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
             builder.HasIndex(e => e.SupplierId)
                 .HasName("product_supplier_id_idx");
 
-            builder.HasOne(e => e.SupplierNavigation)
+            builder.HasOne(e => e.Supplier)
                 .WithMany(e => e.Products)
                 .HasForeignKey(p => p.SupplierId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

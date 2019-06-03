@@ -20,7 +20,7 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
             builder.Property(e => e.OrderId)
                 .IsRequired();
 
-            builder.HasOne(e => e.OrderNavigation)
+            builder.HasOne(e => e.Order)
                 .WithMany(e => e.OrderItems)
                 .HasForeignKey(e => e.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -29,7 +29,7 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
             builder.Property(e => e.ProductId)
                 .IsRequired();
 
-            builder.HasOne(e => e.ProductNavigation)
+            builder.HasOne(e => e.Product)
                 .WithMany(e => e.OrderItems)
                 .HasForeignKey(e => e.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

@@ -16,6 +16,6 @@ namespace Belatrix.WebApi.Models
         public string Country { get; set; }
         public string Phone { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

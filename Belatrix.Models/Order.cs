@@ -16,7 +16,7 @@ namespace Belatrix.WebApi.Models
         public int CustomerId { get; set; }
         public decimal? TotalAmount { get; set; }
 
-        public virtual Customer CustomerNavigation { get; set; }
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public Customer Customer { get; set; }
+        public ICollection<OrderItem> OrderItems { get; set; }
     }
 }
