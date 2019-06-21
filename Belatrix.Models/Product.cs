@@ -1,10 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Belatrix.WebApi.Models
 {
     public class Product
     {
+        public Product()
+        {
+            OrderItem = new HashSet<OrderItem>();
+        }
+
         public int Id { get; set; }
         public string ProductName { get; set; }
         public int SupplierId { get; set; }
@@ -13,6 +17,6 @@ namespace Belatrix.WebApi.Models
         public bool IsDiscontinued { get; set; }
 
         public Supplier Supplier { get; set; }
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderItem> OrderItem { get; set; }
     }
 }

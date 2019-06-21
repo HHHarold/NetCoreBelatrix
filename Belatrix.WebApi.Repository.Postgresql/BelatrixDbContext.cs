@@ -6,16 +6,16 @@ namespace Belatrix.WebApi.Repository.Postgresql
 {
     public class BelatrixDbContext : DbContext
     {
-        public BelatrixDbContext(DbContextOptions<BelatrixDbContext> opt)
-            :base(opt)
+        public BelatrixDbContext(DbContextOptions<BelatrixDbContext> options)
+            : base(options)
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderItem> OrderItem { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Supplier> Supplier { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace Belatrix.WebApi.Repository.Postgresql
             modelBuilder.ApplyConfiguration(new OrderConfig());
             modelBuilder.ApplyConfiguration(new OrderItemConfig());
             modelBuilder.ApplyConfiguration(new ProductConfig());
-            modelBuilder.ApplyConfiguration(new SupplierConfig());
+            modelBuilder.ApplyConfiguration(new SupplierConfig());            
         }
     }
 }

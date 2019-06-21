@@ -7,7 +7,7 @@ namespace Belatrix.WebApi.Models
     {
         public Order()
         {
-            OrderItems = new HashSet<OrderItem>();
+            OrderItem = new HashSet<OrderItem>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace Belatrix.WebApi.Models
         public decimal? TotalAmount { get; set; }
 
         public Customer Customer { get; set; }
-        public ICollection<OrderItem> OrderItems { get; set; }
+        public ICollection<OrderItem> OrderItem { get; set; }
     }
 }

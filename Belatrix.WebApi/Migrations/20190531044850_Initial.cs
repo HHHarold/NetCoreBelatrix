@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Belatrix.WebApi.Repository.Postgresql.Migrations
+namespace Belatrix.WebApi.Migrations
 {
-    public partial class InitialSetUp : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,13 +16,13 @@ namespace Belatrix.WebApi.Repository.Postgresql.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     first_name = table.Column<string>(maxLength: 40, nullable: false),
                     last_name = table.Column<string>(maxLength: 40, nullable: false),
-                    city = table.Column<string>(maxLength: 40, nullable: false),
-                    country = table.Column<string>(maxLength: 40, nullable: false),
-                    phone = table.Column<string>(maxLength: 20, nullable: false)
+                    city = table.Column<string>(maxLength: 40, nullable: true),
+                    country = table.Column<string>(maxLength: 40, nullable: true),
+                    phone = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_customer", x => x.id);
+                    table.PrimaryKey("customer_id_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -32,16 +32,16 @@ namespace Belatrix.WebApi.Repository.Postgresql.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     company_name = table.Column<string>(maxLength: 40, nullable: false),
-                    contact_name = table.Column<string>(maxLength: 50, nullable: false),
-                    contact_title = table.Column<string>(maxLength: 40, nullable: false),
-                    city = table.Column<string>(maxLength: 40, nullable: false),
-                    country = table.Column<string>(maxLength: 40, nullable: false),
-                    phone = table.Column<string>(maxLength: 30, nullable: false),
-                    fax = table.Column<string>(maxLength: 30, nullable: false)
+                    contact_name = table.Column<string>(maxLength: 50, nullable: true),
+                    contact_title = table.Column<string>(maxLength: 40, nullable: true),
+                    city = table.Column<string>(maxLength: 40, nullable: true),
+                    country = table.Column<string>(maxLength: 40, nullable: true),
+                    phone = table.Column<string>(maxLength: 30, nullable: true),
+                    fax = table.Column<string>(maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_supplier", x => x.id);
+                    table.PrimaryKey("supplier_id_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,16 +50,16 @@ namespace Belatrix.WebApi.Repository.Postgresql.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    order_date = table.Column<DateTime>(nullable: false),
+                    order_date = table.Column<DateTime>(type: "date", nullable: false),
                     order_number = table.Column<string>(maxLength: 10, nullable: false),
                     customer_id = table.Column<int>(nullable: false),
-                    total_amount = table.Column<decimal>(type: "decimal(12,2)", nullable: false)
+                    total_amount = table.Column<decimal>(type: "numeric(12,2)", nullable: false, defaultValueSql: "0")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_order", x => x.id);
+                    table.PrimaryKey("order_id_pkey", x => x.id);
                     table.ForeignKey(
-                        name: "order_customer_id_fkey",
+                        name: "order__reference_customer__idx",
                         column: x => x.customer_id,
                         principalTable: "customer",
                         principalColumn: "id",
@@ -74,15 +74,15 @@ namespace Belatrix.WebApi.Repository.Postgresql.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     product_name = table.Column<string>(maxLength: 50, nullable: false),
                     supplier_id = table.Column<int>(nullable: false),
-                    unit_price = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
-                    package = table.Column<string>(maxLength: 30, nullable: false),
-                    is_idscontinued = table.Column<bool>(nullable: false)
+                    unit_price = table.Column<decimal>(type: "numeric(12,2)", nullable: true, defaultValueSql: "0"),
+                    package = table.Column<string>(maxLength: 30, nullable: true),
+                    is_discontinued = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_product", x => x.id);
+                    table.PrimaryKey("product_id_pkey", x => x.id);
                     table.ForeignKey(
-                        name: "product_supplier_id_fkey",
+                        name: "product__reference_supplier__fkey",
                         column: x => x.supplier_id,
                         principalTable: "supplier",
                         principalColumn: "id",
@@ -95,23 +95,23 @@ namespace Belatrix.WebApi.Repository.Postgresql.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    OrderId = table.Column<int>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false),
-                    unit_price = table.Column<decimal>(type: "decimal(12,2)", nullable: false),
-                    quantity = table.Column<int>(nullable: false)
+                    order_id = table.Column<int>(nullable: false),
+                    product_id = table.Column<int>(nullable: false),
+                    unit_price = table.Column<decimal>(type: "numeric(12,2)", nullable: false),
+                    quantity = table.Column<int>(nullable: false, defaultValueSql: "1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_order_item", x => x.id);
+                    table.PrimaryKey("order_item__id__pkey", x => x.id);
                     table.ForeignKey(
-                        name: "order_item_order_id_fkey",
-                        column: x => x.OrderId,
+                        name: "order_item__reference_order__fkey",
+                        column: x => x.order_id,
                         principalTable: "order",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "order_item_product_id_fkey",
-                        column: x => x.ProductId,
+                        name: "order_item__reference_product__fkey",
+                        column: x => x.product_id,
                         principalTable: "product",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
@@ -123,47 +123,37 @@ namespace Belatrix.WebApi.Repository.Postgresql.Migrations
                 columns: new[] { "last_name", "first_name" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_order_customer_id",
+                name: "order_customer_id__idx",
                 table: "order",
                 column: "customer_id");
 
             migrationBuilder.CreateIndex(
-                name: "order_id_idx",
-                table: "order",
-                column: "id");
-
-            migrationBuilder.CreateIndex(
-                name: "order_order_date_idx",
+                name: "order_order_date__idx",
                 table: "order",
                 column: "order_date");
 
             migrationBuilder.CreateIndex(
-                name: "order_item_id_idx",
+                name: "order_item__order_id__idx",
                 table: "order_item",
-                column: "id");
+                column: "order_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_order_item_OrderId",
+                name: "order_item__produc_tid__idx",
                 table: "order_item",
-                column: "OrderId");
+                column: "product_id");
 
             migrationBuilder.CreateIndex(
-                name: "order_item_product_id_idx",
-                table: "order_item",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "product_product_name_idx",
+                name: "product_name_idx",
                 table: "product",
                 column: "product_name");
 
             migrationBuilder.CreateIndex(
-                name: "product_supplier_id_idx",
+                name: "product__supplier_id__idx",
                 table: "product",
                 column: "supplier_id");
 
             migrationBuilder.CreateIndex(
-                name: "supplier_company_name_idx",
+                name: "supplier_name_idx",
                 table: "supplier",
                 column: "company_name");
 

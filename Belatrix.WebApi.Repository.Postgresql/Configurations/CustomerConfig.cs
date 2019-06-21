@@ -9,34 +9,35 @@ namespace Belatrix.WebApi.Repository.Postgresql.Configurations
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.ToTable("customer")
-                .HasKey(c => c.Id)
+                .HasKey(c=> c.Id)
                 .HasName("customer_id_pkey");
-
-            builder.Property(p => p.Id)
-                .HasColumnName("id");
-
-            builder.Property(p => p.FirstName)
-                .HasColumnName("first_name")
-                .HasMaxLength(40)
-                .IsRequired();
-
+                        
             builder.HasIndex(e => new { e.LastName, e.FirstName })
                 .HasName("customer_name_idx");
 
-            builder.Property(p => p.LastName)
-                .HasColumnName("last_name")
-                .HasMaxLength(40)
-                .IsRequired();
+            builder.Property(e => e.Id)
+                .HasColumnName("id")                                
+                .UseNpgsqlIdentityColumn();
 
-            builder.Property(p => p.City)
+            builder.Property(e => e.City)
                 .HasColumnName("city")
                 .HasMaxLength(40);
 
-            builder.Property(p => p.Country)
+            builder.Property(e => e.Country)
                 .HasColumnName("country")
                 .HasMaxLength(40);
 
-            builder.Property(p => p.Phone)
+            builder.Property(e => e.FirstName)
+                .IsRequired()
+                .HasColumnName("first_name")
+                .HasMaxLength(40);
+
+            builder.Property(e => e.LastName)
+                .IsRequired()
+                .HasColumnName("last_name")
+                .HasMaxLength(40);
+
+            builder.Property(e => e.Phone)
                 .HasColumnName("phone")
                 .HasMaxLength(20);
         }

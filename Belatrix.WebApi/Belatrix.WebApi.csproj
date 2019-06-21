@@ -5,24 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\**" />
-    <Content Remove="Models\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <None Remove="Models\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0-preview5-19227-01" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview5-19227-01" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0-preview5.19227.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.4.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Belatrix.WebApi.Repository.Postgresql\Belatrix.WebApi.Repository.Postgresql.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Identity\Migrations\" />
   </ItemGroup>
 
 </Project>
